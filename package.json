@@ -1,0 +1,26 @@
+{
+  "name": "todomvc-vanilla",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "NODE_ENV=production node server",
+    "dev": "NODE_ENV=development nodemon -w src server"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "@std/esm": "^0.19.0",
+    "express": "^4.16.2",
+    "koa": "^2.4.1",
+    "koa-helmet": "^3.3.0",
+    "koa-mount": "^3.0.0",
+    "koa-static": "^4.0.2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.14.7"
+  },
+  "@std/esm": "cjs",
+  "engines": {
+    "node": "^8.9.4",
+    "npm": "^5.6.0"
+  }
+}
