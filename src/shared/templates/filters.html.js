@@ -1,6 +1,6 @@
 import { html } from 'apply-html';
 
-export default (props) => html`
+export default props => html`
 	<footer class="footer">
 		<!-- This should be "0 items left" by default -->
 		<span class="todo-count"><strong>0</strong> item left</span>

@@ -15,7 +15,7 @@ export default class TodosStore {
 		this.todos.push({
 			id: uuid(),
 			completed: false,
-			title
+			title,
 		});
 
 		return this;
@@ -28,8 +28,7 @@ export default class TodosStore {
 			return this;
 		}
 
-		const todo = this.todos
-			.find(todo => todo.id === id);
+		const todo = this.todos.find(todo => todo.id === id);
 
 		if (!todo) {
 			return this;
@@ -41,8 +40,7 @@ export default class TodosStore {
 	}
 
 	toggle(id) {
-		const todo = this.todos
-			.find(todo => todo.id === id);;
+		const todo = this.todos.find(todo => todo.id === id);
 
 		if (todo) {
 			todo.completed = !todo.completed;
@@ -52,15 +50,13 @@ export default class TodosStore {
 	}
 
 	remove(id) {
-		this.todos = this.todos
-			.filter(todo => todo.id !== id);
+		this.todos = this.todos.filter(todo => todo.id !== id);
 
 		return this;
 	}
 
 	removeCompleted() {
-		this.todos = this.todos
-			.filter(todo => !todo.completed);
+		this.todos = this.todos.filter(todo => !todo.completed);
 
 		return this;
 	}

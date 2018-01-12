@@ -17,10 +17,7 @@ test('.add', async t => {
 		.add('foo')
 		.add(' bar ');
 
-	t.deepEqual(a.todos.map(x => x.title), [
-		'foo',
-		'bar'
-	]);
+	t.deepEqual(a.todos.map(x => x.title), ['foo', 'bar']);
 });
 
 test('.edit', async t => {
@@ -29,15 +26,11 @@ test('.edit', async t => {
 	a.edit('bogus', 'hello world');
 	a.edit('foo');
 
-	t.deepEqual(a.todos, [
-		{ id: 'foo', title: 'bar' }
-	]);
+	t.deepEqual(a.todos, [{ id: 'foo', title: 'bar' }]);
 
 	a.edit('foo', ' baz ');
 
-	t.deepEqual(a.todos, [
-		{ id: 'foo', title: 'baz' }
-	]);
+	t.deepEqual(a.todos, [{ id: 'foo', title: 'baz' }]);
 });
 
 test('.toggle', async t => {
@@ -46,22 +39,18 @@ test('.toggle', async t => {
 	a.toggle('bogus');
 	a.toggle('foo');
 
-	t.deepEqual(a.todos, [
-		{ id: 'foo', completed: true }
-	]);
+	t.deepEqual(a.todos, [{ id: 'foo', completed: true }]);
 
 	a.toggle('foo');
 
-	t.deepEqual(a.todos, [
-		{ id: 'foo', completed: false }
-	]);
+	t.deepEqual(a.todos, [{ id: 'foo', completed: false }]);
 });
 
 test('.remove', async t => {
 	const a = new TodosStore([
 		{ id: 'foo', completed: false },
 		{ id: 'bar', completed: false },
-		{ id: 'baz', completed: true }
+		{ id: 'baz', completed: true },
 	]);
 
 	a.remove('bogus');
@@ -69,7 +58,7 @@ test('.remove', async t => {
 
 	t.deepEqual(a.todos, [
 		{ id: 'foo', completed: false },
-		{ id: 'baz', completed: true }
+		{ id: 'baz', completed: true },
 	]);
 });
 
@@ -77,13 +66,13 @@ test('.removeCompleted', async t => {
 	const a = new TodosStore([
 		{ id: 'foo', completed: false },
 		{ id: 'bar', completed: false },
-		{ id: 'baz', completed: true }
+		{ id: 'baz', completed: true },
 	]);
 
 	a.removeCompleted();
 
 	t.deepEqual(a.todos, [
 		{ id: 'foo', completed: false },
-		{ id: 'bar', completed: false }
+		{ id: 'bar', completed: false },
 	]);
 });

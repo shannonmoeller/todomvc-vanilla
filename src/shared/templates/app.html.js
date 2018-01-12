@@ -2,7 +2,7 @@ import { html } from 'apply-html';
 import renderList from './list.html.js';
 import renderFilters from './filters.html.js';
 
-export default (props) => html`
+export default props => html`
 	<todo-app props="${props}">
 		<section class="todoapp">
 			<header class="header">

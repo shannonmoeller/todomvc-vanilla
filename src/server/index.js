@@ -8,7 +8,7 @@ import renderApp from '../shared/templates/app.html.js';
 
 const directives = {
 	imgSrc: ["'self'", 'data:'],
-	defaultSrc: ["'self'"]
+	defaultSrc: ["'self'"],
 };
 
 function getApp({ response, request }) {
@@ -20,13 +20,13 @@ function getApp({ response, request }) {
 
 	const state = {
 		path: request.path,
-		title: 'Vanilla'
+		title: 'Vanilla',
 	};
 
 	response.body = String(
 		renderLayout({
 			title: state.title,
-			body: renderApp(state)
+			body: renderApp(state),
 		})
 	);
 }

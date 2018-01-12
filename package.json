@@ -6,9 +6,9 @@
     "start": "NODE_ENV=production node server",
     "dev": "NODE_ENV=development nodemon -w src server",
     "lint": "run-s lint-*",
-    "lint-prettier": "prettier --fix src/**/*.js",
+    "lint-prettier": "prettier --write 'src/**/*.js'",
     "test": "nyc run-s test-*",
-    "test-node": "blue-tape -r @std/esm src/**/*.test.js | tap-diff",
+    "test-node": "blue-tape -r @std/esm 'src/**/*.test.js' | tap-diff",
     "precommit": "run-s test",
     "pretest": "run-s lint"
   },
@@ -34,6 +34,10 @@
     "nyc": "^11.4.1",
     "prettier": "^1.10.2",
     "tap-diff": "^0.1.1"
+  },
+  "prettier": {
+    "single-quote": true,
+    "trailing-comma": "es5"
   },
   "@std/esm": "cjs",
   "engines": {
