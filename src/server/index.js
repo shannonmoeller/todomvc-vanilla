@@ -7,6 +7,7 @@ import renderLayout from '../shared/templates/layout.html.js';
 import renderApp from '../shared/templates/app.html.js';
 
 const directives = {
+	imgSrc: ["'self'", 'data:'],
 	defaultSrc: ["'self'"]
 };
 
@@ -19,19 +20,21 @@ function getApp({ response, request }) {
 
 	const state = {
 		path: request.path,
-		title: 'Hello World'
+		title: 'Vanilla'
 	};
 
-	response.body = renderLayout({
-		title: state.title,
-		body: renderApp(state)
-	});
+	response.body = String(
+		renderLayout({
+			title: state.title,
+			body: renderApp(state)
+		})
+	);
 }
 
 export default new Koa()
 	.use(helmet())
 	.use(helmet.contentSecurityPolicy({ directives }))
-	.use(mount('/client', serve('src/client')))
-	.use(mount('/shared', serve('src/shared')))
-	.use(helmet.noCache())
+	.use(mount('/node_modules', serve('./node_modules')))
+	.use(mount('/client', serve('./src/client')))
+	.use(mount('/shared', serve('./src/shared')))
 	.use(getApp);
