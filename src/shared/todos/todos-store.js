@@ -78,13 +78,13 @@ export default class TodosStore extends Store {
 
 	removeCompleted() {
 		const { todos } = this;
-		const length = todos.length;
+		const filteredTodos = todos.filter(x => !x.completed);
 
-		this.todos = todos.filter(x => !x.completed);
-
-		if (this.length === length) {
+		if (filteredTodos.length === todos.length) {
 			return this;
 		}
+
+		this.todos = filteredTodos;
 
 		return this.update();
 	}
