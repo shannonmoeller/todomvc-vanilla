@@ -5,14 +5,18 @@ export default class TodosApp extends TodosElement {
 	constructor() {
 		super();
 
-		const store = new TodosStore();
+		this.store = new TodosStore();
+	}
 
-		store.addListener(() => this.render());
+	connectedCallback() {
+		this.removeStoreListener = this.store.addListener(() => this.render());
+	}
 
-		this.store = store;
+	disconnectedCallback() {
+		this.removeStoreListener = this.removeStoreListener();
 	}
 
 	render() {
-		console.log('render', this.store);
+		console.log('render', this.store.todos);
 	}
 }
