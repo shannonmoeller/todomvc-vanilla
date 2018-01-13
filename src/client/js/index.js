@@ -1,7 +1,3 @@
-class TodoApp extends HTMLElement {
-	connectedCallback() {
-		console.log(JSON.parse(this.getAttribute('props')));
-	}
-}
+import TodosApp from '../el/todos-app/todos-app.js';
 
-customElements.define('todo-app', TodoApp);
+customElements.define('todos-app', TodosApp);

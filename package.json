@@ -3,16 +3,21 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "NODE_ENV=production node server",
-    "dev": "NODE_ENV=development nodemon -w src server",
+    "start": "NODE_ENV=production bin/www",
+    "dev": "NODE_ENV=development nodemon -w bin -w src/server -w src/shared bin/www",
     "lint": "run-s lint-*",
-    "lint-prettier": "prettier --write 'src/**/*.js'",
+    "lint-prettier": "prettier --write 'src/**/*.{css,js}'",
+    "lint-eslint": "eslint --fix 'src/**/*.js' || exit 0",
+    "lint-stylelint": "stylelint --fix 'src/**/*.css' || exit 0",
     "test": "nyc run-s test-*",
-    "test-node": "blue-tape -r @std/esm 'src/**/*.test.js' | tap-diff",
+    "test-browser": "echo TODO 'src/{client,shared}/**/*.test.js'",
+    "test-node": "blue-tape -r @std/esm 'src/{server,shared}/**/*.test.js' | tap-diff",
     "precommit": "run-s test",
     "pretest": "run-s lint"
   },
-  "main": "index.js",
+  "bin": "bin/www",
+  "main": "src/server/index.js",
+  "browser": "src/client/js/index.js",
   "dependencies": {
     "@std/esm": "^0.19.1",
     "apply-html": "^1.0.0-6",
@@ -22,24 +27,45 @@
     "koa-helmet": "^3.3.0",
     "koa-mount": "^3.0.0",
     "koa-static": "^4.0.2",
+    "stylelint": "^8.4.0",
+    "stylelint-config-prettier": "^2.0.0",
+    "stylelint-config-whim": "^4.0.1",
     "todomvc-app-css": "^2.1.0",
-    "todomvc-common": "^1.0.4",
-    "uuid": "^3.1.0"
+    "todomvc-common": "^1.0.4"
   },
   "devDependencies": {
     "blue-tape": "^1.0.0",
+    "eslint": "^4.15.0",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-config-whim": "^3.0.0",
     "husky": "^0.14.3",
+    "isomorphic-fetch": "^2.2.1",
     "nodemon": "^1.14.10",
     "npm-run-all": "^4.1.2",
     "nyc": "^11.4.1",
     "prettier": "^1.10.2",
     "tap-diff": "^0.1.1"
   },
+  "@std/esm": "cjs",
+  "eslintConfig": {
+    "env": {
+      "es6": true
+    },
+    "extends": [
+      "eslint-config-whim",
+      "eslint-config-prettier"
+    ]
+  },
+  "stylelint": {
+    "extends": [
+      "stylelint-config-whim",
+      "stylelint-config-prettier"
+    ]
+  },
   "prettier": {
     "single-quote": true,
     "trailing-comma": "es5"
   },
-  "@std/esm": "cjs",
   "engines": {
     "node": "^8.9.4",
     "npm": "^5.6.0"

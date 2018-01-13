@@ -1,8 +1,18 @@
-import uuid from 'uuid/v1';
+import Store from '../store/store.js';
 
-export default class TodosStore {
+export default class TodosStore extends Store {
 	constructor(todos) {
+		super();
+
 		this.todos = Array.isArray(todos) ? todos : [];
+	}
+
+	get count() {
+		return this.todos.length;
+	}
+
+	get remainingCount() {
+		return this.todos.filter(x => !x.completed).length;
 	}
 
 	add(title) {
@@ -13,12 +23,12 @@ export default class TodosStore {
 		}
 
 		this.todos.push({
-			id: uuid(),
+			id: Date.now(),
 			completed: false,
 			title,
 		});
 
-		return this;
+		return this.update();
 	}
 
 	edit(id, title) {
@@ -28,7 +38,8 @@ export default class TodosStore {
 			return this;
 		}
 
-		const todo = this.todos.find(todo => todo.id === id);
+		const { todos } = this;
+		const todo = todos.find(x => x.id === id);
 
 		if (!todo) {
 			return this;
@@ -36,28 +47,45 @@ export default class TodosStore {
 
 		todo.title = title;
 
-		return this;
+		return this.update();
 	}
 
 	toggle(id) {
-		const todo = this.todos.find(todo => todo.id === id);
+		const { todos } = this;
+		const todo = todos.find(x => x.id === id);
 
-		if (todo) {
-			todo.completed = !todo.completed;
+		if (!todo) {
+			return this;
 		}
 
-		return this;
+		todo.completed = !todo.completed;
+
+		return this.update();
 	}
 
 	remove(id) {
-		this.todos = this.todos.filter(todo => todo.id !== id);
+		const { todos } = this;
+		const index = todos.findIndex(x => x.id === id);
 
-		return this;
+		if (index === -1) {
+			return this;
+		}
+
+		todos.splice(index, 1);
+
+		return this.update();
 	}
 
 	removeCompleted() {
-		this.todos = this.todos.filter(todo => !todo.completed);
+		const { todos } = this;
+		const length = todos.length;
 
-		return this;
+		this.todos = todos.filter(x => !x.completed);
+
+		if (this.length === length) {
+			return this;
+		}
+
+		return this.update();
 	}
 }
