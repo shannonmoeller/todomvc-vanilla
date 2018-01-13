@@ -15,21 +15,13 @@
     "precommit": "run-s test",
     "pretest": "run-s lint"
   },
-  "bin": "bin/www",
-  "main": "src/server/index.js",
-  "browser": "src/client/js/index.js",
   "dependencies": {
     "@std/esm": "^0.19.1",
     "apply-html": "^1.0.0-6",
-    "express": "^4.16.2",
     "koa": "^2.4.1",
-    "koa-compress": "^2.0.0",
     "koa-helmet": "^3.3.0",
     "koa-mount": "^3.0.0",
     "koa-static": "^4.0.2",
-    "stylelint": "^8.4.0",
-    "stylelint-config-prettier": "^2.0.0",
-    "stylelint-config-whim": "^4.0.1",
     "todomvc-app-css": "^2.1.0",
     "todomvc-common": "^1.0.4"
   },
@@ -44,6 +36,9 @@
     "npm-run-all": "^4.1.2",
     "nyc": "^11.4.1",
     "prettier": "^1.10.2",
+    "stylelint": "^8.4.0",
+    "stylelint-config-prettier": "^2.0.0",
+    "stylelint-config-whim": "^4.0.1",
     "tap-diff": "^0.1.1"
   },
   "@std/esm": "cjs",
