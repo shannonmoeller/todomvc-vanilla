@@ -7,18 +7,16 @@ test('new TodosStore()', async t => {
 
 	t.deepEqual(a.todos, []);
 	t.deepEqual(b.todos, []);
-
-	t.equal(a.count, 0);
-	t.equal(a.remainingCount, 0);
 });
 
 test('.add()', async t => {
-	const a = new TodosStore()
-		.add()
-		.add('')
-		.add(' ')
-		.add('foo')
-		.add(' bar ');
+	const a = new TodosStore();
+
+	a.add();
+	a.add('');
+	a.add(' ');
+	a.add('foo');
+	a.add(' bar ');
 
 	t.deepEqual(a.todos.map(x => x.title), ['foo', 'bar']);
 });
@@ -72,13 +70,8 @@ test('.removeCompleted()', async t => {
 		{ id: 'baz', completed: true },
 	]);
 
-	t.equal(a.count, 3);
-	t.equal(a.remainingCount, 2);
-
 	a.removeCompleted();
 
-	t.equal(a.count, 2);
-	t.equal(a.remainingCount, 2);
 	t.deepEqual(a.todos, [
 		{ id: 'foo', completed: false },
 		{ id: 'bar', completed: false },

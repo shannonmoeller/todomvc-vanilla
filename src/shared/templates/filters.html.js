@@ -1,22 +1,31 @@
 import { html } from 'apply-html';
 
-export default () => html`
-	<footer class="footer">
-		<!-- This should be "0 items left" by default -->
-		<span class="todo-count"><strong>0</strong> item left</span>
-		<!-- Remove this if you don't implement routing -->
-		<ul class="filters">
-			<li>
-				<a class="selected" href="#/">All</a>
-			</li>
-			<li>
-				<a href="#/active">Active</a>
-			</li>
-			<li>
-				<a href="#/completed">Completed</a>
-			</li>
-		</ul>
-		<!-- Hidden if no completed items are left ↓ -->
-		<button class="clear-completed">Clear completed</button>
-	</footer>
-`;
+export default ({ todos }) => {
+	const completedCount = todos.filter(x => x.completed).length;
+	const remainingCount = todos.length - completedCount;
+
+	return html`
+		<footer class="footer">
+			<span class="todo-count">
+				<strong>${remainingCount}</strong>
+				item${remainingCount !== 1 && 's'} left
+			</span>
+			<!-- Remove this if you don't implement routing -->
+			<ul class="filters">
+				<li><a class="selected" href="#/">All</a></li>
+				<li><a href="#/active">Active</a></li>
+				<li><a href="#/completed">Completed</a></li>
+			</ul>
+			<todos-actions>
+				${completedCount !== 0 &&
+					html`
+					<button
+						class="clear-completed"
+						name="removeCompleted">
+						Clear completed
+					</button>
+				`}
+			</todos-actions>
+		</footer>
+	`;
+};

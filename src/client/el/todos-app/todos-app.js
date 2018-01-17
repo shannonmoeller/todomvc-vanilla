@@ -1,11 +1,15 @@
+import { apply } from 'apply-html';
 import TodosElement from '../todos-element/todos-element.js';
 import TodosStore from '../../../shared/todos/todos-store.js';
+import renderApp from '../../../shared/templates/app.html.js';
 
-export default class TodosApp extends TodosElement {
+export default class TodosAppElement extends TodosElement {
 	constructor() {
 		super();
 
-		this.store = new TodosStore();
+		const { todos } = JSON.parse(this.getAttribute('props'));
+
+		this.store = new TodosStore(todos);
 	}
 
 	connectedCallback() {
@@ -17,6 +21,6 @@ export default class TodosApp extends TodosElement {
 	}
 
 	render() {
-		console.log('render', this.store.todos);
+		apply(this, renderApp(this.store));
 	}
 }

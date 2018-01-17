@@ -1,6 +1,6 @@
 import { html } from 'apply-html';
 
-export default ({ title, body }) => html`
+export default ({ title, head, body }) => html`
 	<!doctype html>
 	<html lang="en">
 		<head>
@@ -9,16 +9,14 @@ export default ({ title, body }) => html`
 
 			<title>${title} • TodoMVC</title>
 
-			<script type="module" src="/client/js/index.js"></script>
-
+			<script src="node_modules/todomvc-common/base.js" defer></script>
 			<link rel="stylesheet" href="node_modules/todomvc-common/base.css" />
 			<link rel="stylesheet" href="node_modules/todomvc-app-css/index.css" />
-			<link rel="stylesheet" href="/client/css/index.css" />
+
+			${head}
 		</head>
 		<body>
 			${body}
-
-			<script src="node_modules/todomvc-common/base.js"></script>
 		</body>
 	</html>
 `;

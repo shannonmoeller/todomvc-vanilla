@@ -4,15 +4,9 @@ export default class TodosStore extends Store {
 	constructor(todos) {
 		super();
 
+		this.filter = null;
+		this.editing = null;
 		this.todos = Array.isArray(todos) ? todos : [];
-	}
-
-	get count() {
-		return this.todos.length;
-	}
-
-	get remainingCount() {
-		return this.todos.filter(x => !x.completed).length;
 	}
 
 	add(title) {
@@ -23,7 +17,7 @@ export default class TodosStore extends Store {
 		}
 
 		this.todos.push({
-			id: Date.now(),
+			id: `todo-${Date.now()}`,
 			completed: false,
 			title,
 		});
@@ -31,8 +25,16 @@ export default class TodosStore extends Store {
 		return this.update();
 	}
 
+	startEdit(id) {
+		this.editing = id;
+
+		return this.update();
+	}
+
 	edit(id, title) {
 		title = title && title.trim();
+
+		this.editing = null;
 
 		if (!title) {
 			return this;

@@ -5,8 +5,7 @@ import helmet from 'koa-helmet';
 import mount from 'koa-mount';
 import serve from 'koa-static';
 
-import renderLayout from '../shared/templates/layout.html.js';
-import renderApp from '../shared/templates/app.html.js';
+import renderIndex from '../shared/templates/index.html.js';
 
 const directives = {
 	imgSrc: ["'self'", 'data:'],
@@ -21,16 +20,14 @@ function getApp({ response, request }) {
 	}
 
 	const state = {
-		path: request.path,
-		title: 'Vanilla',
+		todos: [
+			{ id: 'foo', completed: true, title: 'Taste JavaScript' },
+			{ id: 'bar', completed: false, title: 'Buy a unicorn' },
+			{ id: 'baz', completed: false, title: 'Buy milk' },
+		],
 	};
 
-	response.body = String(
-		renderLayout({
-			title: state.title,
-			body: renderApp(state),
-		})
-	);
+	response.body = renderIndex(state).toString();
 }
 
 export default new Koa()

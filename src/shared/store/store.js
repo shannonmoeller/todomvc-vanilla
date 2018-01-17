@@ -1,8 +1,10 @@
 import { debounce } from '../utils/utils-function.js';
 
-const update = debounce(listeners => {
+function update(listeners) {
 	listeners.forEach(x => x());
-});
+}
+
+const debouncedUpdate = debounce(update);
 
 export default class Store {
 	constructor() {
@@ -18,8 +20,6 @@ export default class Store {
 	}
 
 	update() {
-		update(this.listeners);
-
-		return this;
+		return debouncedUpdate(this.listeners);
 	}
 }
