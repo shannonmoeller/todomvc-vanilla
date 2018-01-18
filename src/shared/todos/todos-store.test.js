@@ -22,12 +22,15 @@ test('.add()', async t => {
 });
 
 test('.edit()', async t => {
-	const a = new TodosStore([{ id: 'foo', title: 'bar' }]);
+	const a = new TodosStore([
+		{ id: 'foo', title: 'hello' },
+		{ id: 'bar', title: 'world' },
+	]);
 
-	a.edit('bogus', 'hello world');
-	a.edit('foo');
+	a.edit('bogus', 'goodnight moon');
+	a.edit('bar');
 
-	t.deepEqual(a.todos, [{ id: 'foo', title: 'bar' }]);
+	t.deepEqual(a.todos, [{ id: 'foo', title: 'hello' }]);
 
 	a.edit('foo', ' baz ');
 

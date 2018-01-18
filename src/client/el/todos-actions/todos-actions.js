@@ -8,12 +8,18 @@ export default class TodosActionsElement extends TodosElement {
 	}
 
 	async onClick(event) {
-		console.log('onclick');
-
 		const { name } = event.target;
 
-		if (name === 'removeCompleted') {
-			await this.store.removeCompleted();
+		switch (name) {
+			case 'clear-completed':
+				this.store.removeCompleted();
+				break;
+
+			case 'toggle-all':
+				this.store.toggleAll();
+				break;
+
+			// no default
 		}
 	}
 }

@@ -1,6 +1,6 @@
 import TodosElement from '../todos-element/todos-element.js';
 
-export default class TodosNewElement extends TodosElement {
+export default class TodosAddElement extends TodosElement {
 	constructor() {
 		super();
 

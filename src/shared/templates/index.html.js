@@ -10,8 +10,16 @@ export default props =>
 			<link rel="stylesheet" href="/client/css/bundle.css" />
 		`,
 		body: html`
-			<todos-app props="${props}">
-				${renderApp(props)}
-			</todos-app>
+			<section class="todoapp">
+				<todos-app props="${props}">
+					${renderApp(props)}
+				</todos-app>
+			</section>
+
+			<footer class="info">
+				<p>Double-click to edit a todo</p>
+				<p>Created by <a href="http://shannonmoeller.com">Shannon Moeller</a></p>
+				<p>Part of <a href="http://todomvc.com">TodoMVC</a></p>
+			</footer>
 		`,
 	});

@@ -10,14 +10,7 @@ export default class TodosAppElement extends TodosElement {
 		const { todos } = JSON.parse(this.getAttribute('props'));
 
 		this.store = new TodosStore(todos);
-	}
-
-	connectedCallback() {
-		this.removeStoreListener = this.store.addListener(() => this.render());
-	}
-
-	disconnectedCallback() {
-		this.removeStoreListener = this.removeStoreListener();
+		this.store.addListener(() => this.render());
 	}
 
 	render() {

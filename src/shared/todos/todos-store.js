@@ -5,7 +5,7 @@ export default class TodosStore extends Store {
 		super();
 
 		this.filter = null;
-		this.editing = null;
+		this.editingId = null;
 		this.todos = Array.isArray(todos) ? todos : [];
 	}
 
@@ -26,7 +26,7 @@ export default class TodosStore extends Store {
 	}
 
 	startEdit(id) {
-		this.editing = id;
+		this.editingId = id;
 
 		return this.update();
 	}
@@ -34,17 +34,17 @@ export default class TodosStore extends Store {
 	edit(id, title) {
 		title = title && title.trim();
 
-		this.editing = null;
+		this.editingId = null;
 
 		if (!title) {
-			return this;
+			return this.remove(id);
 		}
 
 		const { todos } = this;
 		const todo = todos.find(x => x.id === id);
 
 		if (!todo) {
-			return this;
+			return this.update();
 		}
 
 		todo.title = title;
@@ -61,6 +61,19 @@ export default class TodosStore extends Store {
 		}
 
 		todo.completed = !todo.completed;
+
+		return this.update();
+	}
+
+	toggleAll() {
+		const { todos } = this;
+		const todosCount = todos.length;
+		const completedCount = todos.filter(x => x.completed).length;
+		const isComplete = completedCount !== todosCount;
+
+		todos.forEach(x => {
+			x.completed = isComplete;
+		});
 
 		return this.update();
 	}

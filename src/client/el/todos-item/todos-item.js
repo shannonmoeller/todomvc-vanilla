@@ -24,6 +24,8 @@ export default class TodosItemElement extends TodosElement {
 	}
 
 	async onDoubleClick() {
+		console.log('hi');
+
 		const id = this.getAttribute('name');
 
 		await this.store.startEdit(id);
