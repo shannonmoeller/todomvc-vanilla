@@ -24,8 +24,8 @@
   },
   "config": {
     "ignore": "--ignore-path .gitignore",
-    "rollup": "src/client/js/index.js -o src/client/js/bundle.js -mc rollup.config.js",
-    "rollup-test": "src/{client,shared}/**/*.test.js -mc rollup.config.js",
+    "rollup": "src/client/js/index.js -o src/client/js/bundle.js -mc",
+    "rollup-test": "src/{client,shared}/**/*.test.js -mc",
     "postcss": "src/client/css/index.css -o src/client/css/bundle.css -mu postcss-import"
   },
   "dependencies": {
