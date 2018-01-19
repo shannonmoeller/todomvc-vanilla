@@ -1,5 +1,3 @@
-import 'isomorphic-fetch';
-
 import Koa from 'koa';
 import helmet from 'koa-helmet';
 import mount from 'koa-mount';

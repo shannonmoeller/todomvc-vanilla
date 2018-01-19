@@ -6,7 +6,7 @@
     "dev": "FORCE_COLOR=1 run-p -l dev-*",
     "dev-js": "NODE_ENV=development rollup $npm_package_config_rollup -w",
     "dev-css": "NODE_ENV=development postcss $npm_package_config_postcss -w",
-    "dev-serve": "NODE_ENV=development nodemon -w src/server -w src/shared bin/www",
+    "dev-serve": "NODE_ENV=development nodemon bin/www -w src/server -w src/shared",
     "prod": "FORCE_COLOR=1 run-p -l prod-*",
     "prod-js": "NODE_ENV=production rollup $npm_package_config_rollup",
     "prod-css": "NODE_ENV=production postcss $npm_package_config_postcss",
@@ -15,19 +15,21 @@
     "lint-prettier": "prettier $npm_package_config_ignore --write 'src/**/*.{css,js}'",
     "lint-eslint": "eslint $npm_package_config_ignore --fix 'src/**/*.js'",
     "lint-stylelint": "stylelint $npm_package_config_ignore --fix 'src/**/*.css'",
-    "test": "nyc run-s test-*",
-    "test-browser": "echo TODO 'src/{client,shared}/**/*.test.js'",
-    "test-node": "blue-tape -r @std/esm 'src/{server,shared}/**/*.test.js' | tap-diff",
+    "test": "nyc -r none run-s test-*",
+    "test-node": "NODE_ENV=test blue-tape -r @std/esm 'src/{server,shared}/**/*.test.js' | tap-diff",
+    "test-browser": "NODE_ENV=test rollup $npm_package_config_rollup_test | run-headless | tap-diff",
     "precommit": "run-s test",
-    "pretest": "run-s lint || exit 0"
+    "pretest": "run-s lint || exit 0",
+    "posttest": "nyc report"
   },
   "config": {
     "ignore": "--ignore-path .gitignore",
-    "rollup": "src/client/js/index.js -o src/client/js/bundle.js -mc rollup.js",
+    "rollup": "src/client/js/index.js -o src/client/js/bundle.js -mc rollup.config.js",
+    "rollup-test": "src/{client,shared}/**/*.test.js -mc rollup.config.js",
     "postcss": "src/client/css/index.css -o src/client/css/bundle.css -mu postcss-import"
   },
   "dependencies": {
-    "@std/esm": "^0.19.2",
+    "@std/esm": "^0.19.7",
     "apply-html": "^1.0.0-13",
     "koa": "^2.4.1",
     "koa-helmet": "^3.3.0",
@@ -49,10 +51,14 @@
     "postcss-cli": "^4.1.1",
     "postcss-import": "^11.0.0",
     "prettier": "^1.10.2",
-    "rollup": "^0.54.0",
+    "rollup": "^0.54.1",
     "rollup-plugin-commonjs": "^8.2.6",
+    "rollup-plugin-istanbul": "^2.0.0",
+    "rollup-plugin-multi-entry": "^2.0.2",
+    "rollup-plugin-node-builtins": "^2.1.2",
     "rollup-plugin-node-globals": "^1.1.0",
     "rollup-plugin-node-resolve": "^3.0.2",
+    "run-headless": "^1.0.0-10",
     "stylelint": "^8.4.0",
     "stylelint-config-prettier": "^2.0.0",
     "stylelint-config-whim": "^4.0.1",
@@ -76,6 +82,18 @@
     "extends": [
       "stylelint-config-whim",
       "stylelint-config-prettier"
+    ]
+  },
+  "nyc": {
+    "reporter": [
+      "cobertura",
+      "lcov",
+      "text"
+    ],
+    "ignore": [
+      "**/node_modules/**",
+      "**/*.config.js",
+      "**/*.test.js"
     ]
   },
   "engines": {
