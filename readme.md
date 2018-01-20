@@ -29,7 +29,7 @@ $ npm run test
 
 ## node_modules
 
-Better patterns for using `node_modules` are in the works, but currently impractical:
+Better patterns for using `node_modules` browser-side are in the works, but currently impractical:
 
 - https://gist.github.com/ceejbot/b49f8789b2ab6b09548ccb72813a1054
 - https://jakearchibald.com/2017/es-modules-in-browsers/
