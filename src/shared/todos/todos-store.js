@@ -69,10 +69,10 @@ export default class TodosStore extends Store {
 		const { todos } = this;
 		const todosCount = todos.length;
 		const completedCount = todos.filter(x => x.completed).length;
-		const isComplete = completedCount !== todosCount;
+		const isComplete = completedCount === todosCount;
 
 		todos.forEach(x => {
-			x.completed = isComplete;
+			x.completed = !isComplete;
 		});
 
 		return this.update();

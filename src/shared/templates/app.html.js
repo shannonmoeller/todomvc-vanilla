@@ -36,11 +36,10 @@ export default ({ editingId, todos }) => {
 			`}
 
 			<ul class="todo-list">
-				${todos.map(todo => renderItem(
-					Object.assign({}, todo, {
-						editing: todo.id === editingId,
-					})
-				))}
+				${todos.map(todo => renderItem({
+					editing: todo.id === editingId,
+					todo
+				}))}
 			</ul>
 		</section>
 

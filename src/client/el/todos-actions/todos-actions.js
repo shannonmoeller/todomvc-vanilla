@@ -26,14 +26,14 @@ export default class TodosActionsElement extends TodosElement {
 		);
 	}
 
-	async add(event) {
-		if (event.type === 'keydown' && event.key !== 'Enter') {
+	async add({ key, type }, target) {
+		if (type === 'keydown' && key !== 'Enter') {
 			return;
 		}
 
-		await this.store.add(event.target.value);
+		await this.store.add(target.value);
 
-		event.target.value = '';
+		target.value = '';
 	}
 
 	async clearCompleted() {

@@ -5,6 +5,8 @@ export default class TodosItemElement extends TodosElement {
 	constructor() {
 		super();
 
+		this.addEventListener('dblclick', this.startEdit);
+
 		this.addEventListener(
 			'click',
 			delegate('[name="remove"]', this.remove)
@@ -24,8 +26,6 @@ export default class TodosItemElement extends TodosElement {
 			'keydown',
 			delegate('[name="edit"]', this.endEdit)
 		);
-
-		this.addEventListener('dblclick', this.startEdit);
 	}
 
 	get name() {
@@ -43,11 +43,11 @@ export default class TodosItemElement extends TodosElement {
 	async startEdit() {
 		await this.store.startEdit(this.name);
 
-		this.querySelector('.edit').select();
+		this.querySelector('[name="edit"]').select();
 	}
 
-	async endEdit(event, target) {
-		if (event.type === 'keydown' && event.key !== 'Enter') {
+	async endEdit({ key, type }, target) {
+		if (type === 'keydown' && key !== 'Enter') {
 			return;
 		}
 
