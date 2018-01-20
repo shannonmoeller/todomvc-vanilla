@@ -37,9 +37,7 @@ Better patterns for using `node_modules` browser-side are in the works, but curr
 
 ----
 
-© Shannon Moeller <me@shannonmoeller.com> (shannonmoeller.com)
-
-Licensed under [MIT](http://shannonmoeller.com/mit.txt)
+MIT © [Shannon Moeller](http://shannonmoeller.com)
 
 [coveralls-img]: http://img.shields.io/coveralls/shannonmoeller/todomvc-vanilla/master.svg?style=flat-square
 [coveralls-url]: https://coveralls.io/r/shannonmoeller/todomvc-vanilla
