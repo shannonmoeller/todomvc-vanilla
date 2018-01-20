@@ -17,7 +17,7 @@
     "lint-stylelint": "stylelint $npm_package_config_ignore --fix 'src/**/*.css'",
     "test": "nyc -r none run-s test-*",
     "test-node": "NODE_ENV=test blue-tape -r @std/esm 'src/{server,shared}/**/*.test.js' | tap-diff",
-    "test-browser": "NODE_ENV=test rollup $npm_package_config_rollup_test | run-headless | tap-diff",
+    "test-browser": "NODE_ENV=test rollup 'src/{client,shared}/**/*.test.js' -c | run-headless | tap-diff",
     "precommit": "run-s test",
     "pretest": "run-s lint || exit 0",
     "posttest": "nyc report"
@@ -25,7 +25,6 @@
   "config": {
     "ignore": "--ignore-path .gitignore",
     "rollup": "src/client/js/index.js -o src/client/js/bundle.js -mc",
-    "rollup-test": "src/{client,shared}/**/*.test.js -c",
     "postcss": "src/client/css/index.css -o src/client/css/bundle.css -mu postcss-import"
   },
   "dependencies": {
