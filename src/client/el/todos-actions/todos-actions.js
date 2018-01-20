@@ -1,25 +1,26 @@
 import TodosElement from '../todos-element/todos-element.js';
+import { filterEvent } from '../../js/utils/utils-event.js';
 
 export default class TodosActionsElement extends TodosElement {
 	constructor() {
 		super();
 
-		this.addEventListener('click', this.onClick);
+		this.addEventListener(
+			'click',
+			filterEvent('[name="clear-completed"]', this.clearCompleted)
+		);
+
+		this.addEventListener(
+			'click',
+			filterEvent('[name="toggle-all"]', this.toggleAll)
+		);
 	}
 
-	async onClick(event) {
-		const { name } = event.target;
+	async clearCompleted() {
+		await this.store.removeCompleted();
+	}
 
-		switch (name) {
-			case 'clear-completed':
-				this.store.removeCompleted();
-				break;
-
-			case 'toggle-all':
-				this.store.toggleAll();
-				break;
-
-			// no default
-		}
+	async toggleAll() {
+		await this.store.toggleAll();
 	}
 }

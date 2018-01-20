@@ -1,14 +1,10 @@
 import { debounce } from '../utils/utils-function.js';
 
-function update(listeners) {
-	listeners.forEach(x => x());
-}
-
-const debouncedUpdate = debounce(update);
-
 export default class Store {
 	constructor() {
 		this.listeners = new Set();
+
+		this.update = debounce(this.update);
 	}
 
 	addListener(listener) {
@@ -20,6 +16,6 @@ export default class Store {
 	}
 
 	update() {
-		return debouncedUpdate(this.listeners);
+		this.listeners.forEach(x => x());
 	}
 }

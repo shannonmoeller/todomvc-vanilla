@@ -14,12 +14,13 @@ export function defer() {
 }
 
 export function debounce(fn, ms = 0) {
+	/* eslint-disable no-invalid-this */
 	let promise = defer();
 	let id = null;
 
-	function exec(args) {
+	function exec(ctx, args) {
 		try {
-			promise.resolve(fn(...args));
+			promise.resolve(fn.apply(ctx, args));
 		} catch (e) {
 			promise.reject(e);
 		} finally {
@@ -32,7 +33,7 @@ export function debounce(fn, ms = 0) {
 			clearTimeout(id);
 		}
 
-		id = setTimeout(exec, ms, args);
+		id = setTimeout(exec, ms, this, args);
 
 		return promise;
 	};

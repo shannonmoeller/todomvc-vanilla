@@ -25,7 +25,7 @@
   "config": {
     "ignore": "--ignore-path .gitignore",
     "rollup": "src/client/js/index.js -o src/client/js/bundle.js -mc",
-    "rollup-test": "src/{client,shared}/**/*.test.js -mc",
+    "rollup-test": "src/{client,shared}/**/*.test.js -c",
     "postcss": "src/client/css/index.css -o src/client/css/bundle.css -mu postcss-import"
   },
   "dependencies": {
@@ -52,13 +52,9 @@
     "postcss-import": "^11.0.0",
     "prettier": "^1.10.2",
     "rollup": "^0.54.1",
-    "rollup-plugin-commonjs": "^8.2.6",
     "rollup-plugin-istanbul": "^2.0.0",
-    "rollup-plugin-multi-entry": "^2.0.2",
-    "rollup-plugin-node-builtins": "^2.1.2",
-    "rollup-plugin-node-globals": "^1.1.0",
-    "rollup-plugin-node-resolve": "^3.0.2",
-    "run-headless": "^1.0.0-10",
+    "rollup-preset-node": "^1.0.0-1",
+    "run-headless": "^1.0.0",
     "stylelint": "^8.4.0",
     "stylelint-config-prettier": "^2.0.0",
     "stylelint-config-whim": "^4.0.1",

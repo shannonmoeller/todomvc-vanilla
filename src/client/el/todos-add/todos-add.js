@@ -4,21 +4,17 @@ export default class TodosAddElement extends TodosElement {
 	constructor() {
 		super();
 
-		this.addEventListener('focusout', this.onFocusOut);
-		this.addEventListener('keydown', this.onKeyDown);
+		this.addEventListener('focusout', this.add);
+		this.addEventListener('keydown', this.add);
 	}
 
-	async onFocusOut(event) {
+	async add(event) {
+		if (event.type === 'keydown' && event.key !== 'Enter') {
+			return;
+		}
+
 		await this.store.add(event.target.value);
 
 		event.target.value = '';
-	}
-
-	async onKeyDown(event) {
-		if (event.key === 'Enter') {
-			await this.store.add(event.target.value);
-
-			event.target.value = '';
-		}
 	}
 }

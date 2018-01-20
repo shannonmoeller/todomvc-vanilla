@@ -1,54 +1,56 @@
 import TodosElement from '../todos-element/todos-element.js';
+import { filterEvent } from '../../js/utils/utils-event.js';
 
 export default class TodosItemElement extends TodosElement {
 	constructor() {
 		super();
 
-		this.addEventListener('click', this.onClick);
-		this.addEventListener('dblclick', this.onDoubleClick);
-		this.addEventListener('focusout', this.onFocusOut);
-		this.addEventListener('keydown', this.onKeyDown);
+		this.addEventListener(
+			'click',
+			filterEvent('[name="remove"]', this.remove)
+		);
+
+		this.addEventListener(
+			'click',
+			filterEvent('[name="toggle"]', this.toggle)
+		);
+
+		this.addEventListener(
+			'focusout',
+			filterEvent('[name="edit"]', this.endEdit)
+		);
+
+		this.addEventListener(
+			'keydown',
+			filterEvent('[name="edit"]', this.endEdit)
+		);
+
+		this.addEventListener('dblclick', this.startEdit);
 	}
 
-	async onClick(event) {
-		const id = this.getAttribute('name');
-		const { name } = event.target;
-
-		if (name === 'remove') {
-			await this.store.remove(id);
-		}
-
-		if (name === 'toggle') {
-			await this.store.toggle(id);
-		}
+	get name() {
+		return this.getAttribute('name');
 	}
 
-	async onDoubleClick() {
-		console.log('hi');
+	async remove() {
+		await this.store.remove(this.name);
+	}
 
-		const id = this.getAttribute('name');
+	async toggle() {
+		await this.store.toggle(this.name);
+	}
 
-		await this.store.startEdit(id);
+	async startEdit() {
+		await this.store.startEdit(this.name);
 
 		this.querySelector('.edit').select();
 	}
 
-	async onFocusOut(event) {
-		const id = this.getAttribute('name');
-		const { name, value } = event.target;
-
-		if (name === 'edit') {
-			await this.store.edit(id, value);
+	async endEdit(event, target) {
+		if (event.type === 'keydown' && event.key !== 'Enter') {
+			return;
 		}
-	}
 
-	async onKeyDown(event) {
-		const id = this.getAttribute('name');
-		const { key, target } = event;
-		const { name, value } = target;
-
-		if (name === 'edit' && key === 'Enter') {
-			await this.store.edit(id, value);
-		}
+		await this.store.edit(this.name, target.value);
 	}
 }
