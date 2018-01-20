@@ -2,7 +2,7 @@
 
 [![Build Status][travis-img]][travis-url] [![Coverage Status][coveralls-img]][coveralls-url]
 
-A [TodoMVC](http://todomvc.com) example using minimal tooling and evergreen features. Tooling only exists to lint, run tests, generate code coverage, and ([temporarily](#node_modules)) for the use of `node_modules` browser-side.
+A [TodoMVC](http://todomvc.com) example using minimal tooling and evergreen vanilla features. Tooling only exists to lint, run tests, generate code coverage, and ([temporarily](#node_modules)) for the use of `node_modules` browser-side.
 
 ## Install
 
