@@ -27,7 +27,7 @@ Test:
 $ npm run test
 ```
 
-## `node_modules`
+## node_modules
 
 Better patterns for using `node_modules` are in the works, but currently impractical:
 
