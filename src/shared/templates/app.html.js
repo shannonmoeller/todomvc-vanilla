@@ -10,14 +10,15 @@ export default ({ editingId, todos }) => {
 	return html`
 		<header class="header">
 			<h1>todos</h1>
-			<todos-add>
+			<todos-actions>
 				<input
 					type="text"
 					class="new-todo"
+					name="new-todo"
 					placeholder="What needs to be done?"
 					autofocus
 				/>
-			</todos-add>
+			</todos-actions>
 		</header>
 
 		<section class="main">

@@ -1,10 +1,10 @@
-export function filterEvent(selector, callback) {
+export function delegate(selector, callback) {
 	/* eslint-disable no-invalid-this */
-	return function filteredEvent(event) {
-		const el = event.target.closest(selector);
+	return function delegated(event) {
+		const target = event.target.closest(selector);
 
-		if (el && this.contains(el)) {
-			return callback.call(this, event, el);
+		if (target && this.contains(target)) {
+			return callback.call(this, event, target);
 		}
 	};
 }

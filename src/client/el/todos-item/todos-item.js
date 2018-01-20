@@ -1,5 +1,5 @@
 import TodosElement from '../todos-element/todos-element.js';
-import { filterEvent } from '../../js/utils/utils-event.js';
+import { delegate } from '../../js/utils/utils-event.js';
 
 export default class TodosItemElement extends TodosElement {
 	constructor() {
@@ -7,22 +7,22 @@ export default class TodosItemElement extends TodosElement {
 
 		this.addEventListener(
 			'click',
-			filterEvent('[name="remove"]', this.remove)
+			delegate('[name="remove"]', this.remove)
 		);
 
 		this.addEventListener(
 			'click',
-			filterEvent('[name="toggle"]', this.toggle)
+			delegate('[name="toggle"]', this.toggle)
 		);
 
 		this.addEventListener(
 			'focusout',
-			filterEvent('[name="edit"]', this.endEdit)
+			delegate('[name="edit"]', this.endEdit)
 		);
 
 		this.addEventListener(
 			'keydown',
-			filterEvent('[name="edit"]', this.endEdit)
+			delegate('[name="edit"]', this.endEdit)
 		);
 
 		this.addEventListener('dblclick', this.startEdit);
