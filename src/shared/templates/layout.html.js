@@ -9,10 +9,6 @@ export default ({ title, head, body }) => html`
 
 			<title>${title} • TodoMVC</title>
 
-			<script src="node_modules/todomvc-common/base.js" defer></script>
-			<link rel="stylesheet" href="node_modules/todomvc-common/base.css" />
-			<link rel="stylesheet" href="node_modules/todomvc-app-css/index.css" />
-
 			${head}
 		</head>
 		<body>

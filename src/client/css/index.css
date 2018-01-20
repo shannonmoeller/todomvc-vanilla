@@ -1,2 +1,4 @@
+@import 'todomvc-common/base.css';
+@import 'todomvc-app-css/index.css';
 @import '../el/todos-app/todos-app.css';
 @import '../el/todos-item/todos-item.css';

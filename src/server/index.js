@@ -31,7 +31,6 @@ function getApp({ response, request }) {
 export default new Koa()
 	.use(helmet())
 	.use(helmet.contentSecurityPolicy({ directives }))
-	.use(mount('/node_modules', serve('./node_modules')))
 	.use(mount('/client', serve('./src/client')))
 	.use(mount('/shared', serve('./src/shared')))
 	.use(getApp);
