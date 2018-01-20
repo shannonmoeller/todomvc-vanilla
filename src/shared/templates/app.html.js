@@ -10,29 +10,25 @@ export default ({ editingId, todos }) => {
 	return html`
 		<header class="header">
 			<h1>todos</h1>
-			<todos-actions>
-				<input
-					type="text"
-					class="new-todo"
-					name="new-todo"
-					placeholder="What needs to be done?"
-					autofocus
-				/>
-			</todos-actions>
+			<input
+				type="text"
+				class="new-todo"
+				name="new-todo"
+				placeholder="What needs to be done?"
+				autofocus
+			/>
 		</header>
 
 		<section class="main">
 			${totalCount > 0 && html`
-				<todos-actions>
-					<input
-						type="checkbox"
-						id="toggle-all"
-						class="toggle-all"
-						name="toggle-all"
-						${!remainingCount && 'checked'}
-					/>
-					<label for="toggle-all">Mark all as complete</label>
-				</todos-actions>
+				<input
+					type="checkbox"
+					id="toggle-all"
+					class="toggle-all"
+					name="toggle-all"
+					${!remainingCount && 'checked'}
+				/>
+				<label for="toggle-all">Mark all as complete</label>
 			`}
 
 			<ul class="todo-list">
@@ -57,13 +53,11 @@ export default ({ editingId, todos }) => {
 				</ul>
 
 				${completedCount !== 0 && html`
-					<todos-actions>
-						<button
-							class="clear-completed"
-							name="clear-completed">
-							Clear completed
-						</button>
-					</todos-actions>
+					<button
+						class="clear-completed"
+						name="clear-completed">
+						Clear completed
+					</button>
 				`}
 			</footer>
 		`}
