@@ -2,7 +2,7 @@
 
 [![Build Status][travis-img]][travis-url] [![Coverage Status][coveralls-img]][coveralls-url]
 
-A [TodoMVC](http://todomvc.com) example using minimal tooling and evergreen features. Tooling only exists to factilitate the use of `npm` and generation of test code coverage.
+A [TodoMVC](http://todomvc.com) example using minimal tooling and evergreen features. Tooling only exists to temporarily facilitate the use of `npm` and generation of test code coverage.
 
 ## Install
 
